@@ -8,45 +8,50 @@ public class ColisionHandler : MonoBehaviour
     public AudioSource crashSFX;
     public AudioSource winSFX;
 
-    bool isCrashing = false;
-    bool isWinning = false;
+    public ParticleSystem crashPS;
+    public ParticleSystem winPS;
+
+    bool isTransitioning = false;
 
     public float delay = 1f;
     private void OnCollisionEnter(Collision collision)
     {
-        switch (collision.gameObject.tag) 
+        if (!isTransitioning)
         {
-            case "Friendly":
-                break;
-            case "Finish":
-                Land();
-                break;
-            default:
-                Crash();
-                break;
+            switch (collision.gameObject.tag)
+            {
+                case "Friendly":
+                    break;
+                case "Finish":
+                    isTransitioning = true;
+                    Land();
+                    winPS.Play();
+                    break;
+                default:
+                    isTransitioning = true;
+                    Crash();
+                    crashPS.Play();
+                    break;
+            }
         }
     }
 
+    private void Start()
+    {
+        isTransitioning = false;
+    }
 
     void Land()
     {
-        if (!isWinning)
-        {
-            isWinning = true;
-            winSFX.Play();
-            Invoke("LoadNextScene", delay);
-        }
+        winSFX.Play();
+        Invoke("LoadNextScene", delay);
     }
     void Crash()
     {
-        if (!isCrashing)
-        {
-            GetComponent<Movement>().audioSource.Stop();
-            isCrashing = true;
-            crashSFX.Play();
-            GetComponent<Movement>().enabled = false;
-            Invoke("ReloadScene", delay);
-        }
+        GetComponent<Movement>().audioSource.Stop();
+        crashSFX.Play();
+        GetComponent<Movement>().enabled = false;
+        Invoke("ReloadScene", delay);
     }
 
     void ReloadScene()
