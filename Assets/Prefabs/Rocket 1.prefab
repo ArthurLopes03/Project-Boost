@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 538858671379039062}
   m_Layer: 0
   m_Name: Rocket 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,6 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e77e7ed10efce64196bfc6c03bc84e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuel: 10
+  fuelBurn: 2
+  textComponent: {fileID: 0}
   audioSource: {fileID: 398460159049410273}
   mainEngine: {fileID: 8300000, guid: ab59a25fe1972e546aef704ed878c165, type: 3}
   thrust: 1000
@@ -246,6 +249,9 @@ MonoBehaviour:
   mainThrust: {fileID: 2547224938223954652}
   leftThrust: {fileID: 7847583417689400150}
   rightThrust: {fileID: 1876316601963244435}
+  mainThrustMat: {fileID: 2100000, guid: 6d589fa99e17a8a418e369ddf71eb27d, type: 2}
+  rightThrustMat: {fileID: 2100000, guid: de3e5f4b566f7d14da1b246d7985e09c, type: 2}
+  leftThrustMat: {fileID: 2100000, guid: 9721c7b36111e9c4598096f7048fbc3d, type: 2}
 --- !u!114 &538858671379039062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +657,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 265c0f3243754a244831cf2d4d29a7a0, type: 2}
+  - {fileID: 2100000, guid: 6d589fa99e17a8a418e369ddf71eb27d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -845,7 +851,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 265c0f3243754a244831cf2d4d29a7a0, type: 2}
+  - {fileID: 2100000, guid: de3e5f4b566f7d14da1b246d7985e09c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1167,7 +1173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 265c0f3243754a244831cf2d4d29a7a0, type: 2}
+  - {fileID: 2100000, guid: 9721c7b36111e9c4598096f7048fbc3d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
