@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Thruster Mat is set to black on start
         mainThrustMat.color = Color.black;
         rightThrustMat.color = Color.black;
         leftThrustMat.color = Color.black;
@@ -36,6 +37,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Thrusters will return to black over time
         mainThrustMat.color = Color.Lerp(mainThrustMat.color, Color.black, 0.2f * Time.deltaTime);
         rightThrustMat.color = Color.Lerp(rightThrustMat.color, Color.black, 0.2f * Time.deltaTime);
         leftThrustMat.color = Color.Lerp(leftThrustMat.color, Color.black, 0.2f * Time.deltaTime);
@@ -48,6 +50,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && fuel > 0)
         {
+            //When the thruster is active, the colour of the mat is lerped between black and red over time
             mainThrustMat.color = Color.Lerp(mainThrustMat.color, Color.red, 0.5f * Time.deltaTime);
 
             if (!audioSource.isPlaying)

@@ -10,6 +10,11 @@ public class ApplyNoise : MonoBehaviour
     private Vector3[] baseVertices;
     private Vector3[] vertices;
     // Update is called once per frame
+
+    private void Start()
+    {
+        speed = speed * Random.Range(0.8f, 1.3f);
+    }
     void Update()
     {
         CalcNoise();

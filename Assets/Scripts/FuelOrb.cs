@@ -14,22 +14,27 @@ public class FuelOrb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //On start, fuel orb adjusts size based on fuel amount
         fuelPos = GetComponent<Transform>();
         Vector3 scale;
-        scale.y = fuel;
-        scale.z = fuel;
-        scale.x = fuel;
+        scale.y = fuel/2 + 1;
+        scale.z = fuel/2 + 1;
+        scale.x = fuel/2 + 1;
         GetComponent<Transform>().transform.localScale = scale;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //Checks if triggerer is player
         if (other.gameObject.tag == "Player" && !isFueling)
         {
+            //Adds fuel to player
             other.GetComponent<Movement>().fuel += fuel;
             isFueling = true;
+            //Grabs player position
             playerPos = other.gameObject.GetComponent<Transform>();
-            Invoke("DestroyOrb", 1);
+            //Destroys Orb after 0.3 seconds
+            Invoke("DestroyOrb", 0.3f);
         }
     }
 
@@ -39,7 +44,7 @@ public class FuelOrb : MonoBehaviour
         if(playerPos != null)
         {
             pos = playerPos.position;
-            fuelPos.position = Vector3.MoveTowards(fuelPos.position, pos, 0.02f);
+            fuelPos.position = Vector3.MoveTowards(fuelPos.position, pos, 0.1f);
             fuelPos.localScale = Vector3.Lerp(fuelPos.localScale, new Vector3(0.1f, 0.1f, 0.1f), shrinkRate * Time.deltaTime);
         }
     }
