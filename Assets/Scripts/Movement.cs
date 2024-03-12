@@ -42,6 +42,8 @@ public class Movement : MonoBehaviour
         rightThrustMat.color = Color.Lerp(rightThrustMat.color, Color.black, 0.2f * Time.deltaTime);
         leftThrustMat.color = Color.Lerp(leftThrustMat.color, Color.black, 0.2f * Time.deltaTime);
 
+        textComponent.text = "Fuel : " + fuel.ToString("F1");
+
         ProcessThrust();
         ProcessRotation();
     }
@@ -69,7 +71,6 @@ public class Movement : MonoBehaviour
 
             if (fuel < 0)
                 fuel = 0;
-            textComponent.text = "Fuel : " + fuel.ToString("F1");
         }
 
         else 
