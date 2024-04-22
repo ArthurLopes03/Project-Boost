@@ -7,7 +7,8 @@ public class Movement : MonoBehaviour
 {
     Rigidbody rb;
 
-    public float fuel = 100;
+    public SO_GameData gm;
+
     public int fuelBurn = 1;
     public TMP_Text textComponent;
 
@@ -22,15 +23,18 @@ public class Movement : MonoBehaviour
     public Material mainThrustMat;
     public Material rightThrustMat;
     public Material leftThrustMat;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        gm.Start();
+
         //Thruster Mat is set to black on start
         mainThrustMat.color = Color.black;
         rightThrustMat.color = Color.black;
         leftThrustMat.color = Color.black;
 
-        textComponent.text = "Fuel : " + fuel.ToString("F1");
         rb = GetComponent<Rigidbody>();
     }
 
@@ -42,7 +46,7 @@ public class Movement : MonoBehaviour
         rightThrustMat.color = Color.Lerp(rightThrustMat.color, Color.black, 0.2f * Time.deltaTime);
         leftThrustMat.color = Color.Lerp(leftThrustMat.color, Color.black, 0.2f * Time.deltaTime);
 
-        textComponent.text = "Fuel : " + fuel.ToString("F1");
+        textComponent.text = gm.UpdateStatus();
 
         ProcessThrust();
         ProcessRotation();
@@ -50,7 +54,7 @@ public class Movement : MonoBehaviour
 
     void ProcessThrust()
     {
-        if (Input.GetKey(KeyCode.Space) && fuel > 0)
+        if (Input.GetKey(KeyCode.Space) && gm.gameStatus.fuel > 0)
         {
             //When the thruster is active, the colour of the mat is lerped between black and red over time
             mainThrustMat.color = Color.Lerp(mainThrustMat.color, Color.red, 0.5f * Time.deltaTime);
@@ -67,10 +71,10 @@ public class Movement : MonoBehaviour
 
             rb.AddRelativeForce(Vector3.up * thrust * Time.deltaTime);
 
-            fuel -= Time.deltaTime * fuelBurn;
+            gm.gameStatus.fuel -= Time.deltaTime * fuelBurn;
 
-            if (fuel < 0)
-                fuel = 0;
+            if (gm.gameStatus.fuel < 0)
+                gm.gameStatus.fuel = 0;
         }
 
         else 

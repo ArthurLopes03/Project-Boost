@@ -29,7 +29,7 @@ public class FuelOrb : MonoBehaviour
         if (other.gameObject.tag == "Player" && !isFueling)
         {
             //Adds fuel to player
-            other.GetComponent<Movement>().fuel += fuel;
+            other.GetComponent<Movement>().gm.gameStatus.fuel += fuel;
             isFueling = true;
             //Grabs player position
             playerPos = other.gameObject.GetComponent<Transform>();

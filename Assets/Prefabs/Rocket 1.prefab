@@ -209,7 +209,6 @@ GameObject:
   - component: {fileID: 5743493122986764029}
   - component: {fileID: 5743493122986764000}
   - component: {fileID: 538858671379039062}
-  - component: {fileID: 1767850036237907535}
   m_Layer: 0
   m_Name: Rocket 1
   m_TagString: Player
@@ -339,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e77e7ed10efce64196bfc6c03bc84e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuel: 10
+  gm: {fileID: 11400000, guid: 53eadc0f3022d1e459fea6026bb9c2a4, type: 2}
   fuelBurn: 2
   textComponent: {fileID: 0}
   audioSource: {fileID: 398460159049410273}
@@ -369,21 +368,6 @@ MonoBehaviour:
   crashPS: {fileID: 3370706412952519263}
   winPS: {fileID: 2429925155602538663}
   delay: 2.3
---- !u!114 &1767850036237907535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201815727359265117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfbf9df1abe0bbc49b2a41a1ea21fbd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2705767301047571500, guid: 42e8edcf5af76814486307dbf2ed15fd, type: 3}
-  spawnPoint: {fileID: 431502969985621570}
-  canSpawn: 1
 --- !u!1 &587115048709552202
 GameObject:
   m_ObjectHideFlags: 0
