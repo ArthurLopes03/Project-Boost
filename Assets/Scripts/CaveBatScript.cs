@@ -79,7 +79,7 @@ public class CaveBatScript : MonoBehaviour
 
         if(Vector3.Distance(playerPos.position, transform.position) < proximityDetection)
         {
-            Debug.Log("Player in Bat's proximity");
+            //Debug.Log("Player in Bat's proximity");
             batState = AIState.Chase;
         }
         else if(Vector3.Distance(playerPos.position, transform.position) < proximityDetection)
@@ -105,7 +105,7 @@ public class CaveBatScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                Debug.Log("Bat Heard Engine");
+                //Debug.Log("Bat Heard Engine");
                 targetPosVector = playerPos.position;
 
                 nextTarget.position = targetPosVector;
@@ -117,7 +117,7 @@ public class CaveBatScript : MonoBehaviour
 
     private void ReturnToPatrol()
     {
-        Debug.Log("Bat lost target, returning to patrol");
+        //Debug.Log("Bat lost target, returning to patrol");
         wayPointIndex = 0;
 
         targetPosVector = wayPoints[wayPointIndex].position;

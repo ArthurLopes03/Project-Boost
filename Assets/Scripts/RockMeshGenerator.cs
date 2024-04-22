@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thingy : MonoBehaviour
+public class RockMeshGenerator : MonoBehaviour
 {
     public float range;
     // Set up width and height variables
@@ -109,8 +109,7 @@ public class Thingy : MonoBehaviour
 
         mesh.RecalculateNormals();
 
-        //Adds rigidbody and meshcollider 
-        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+        //Adds meshcollider 
         MeshCollider mc = gameObject.AddComponent<MeshCollider>();
         mc.convex = true;
     }

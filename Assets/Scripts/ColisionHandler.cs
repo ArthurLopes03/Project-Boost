@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class ColisionHandler : MonoBehaviour
 {
+    public SO_GameData gameData;
+    public SO_SceneManager sceneManager;
+    public SO_StatisticalData statsData;
+
     public AudioSource crashSFX;
     public AudioSource winSFX;
 
@@ -49,10 +54,21 @@ public class ColisionHandler : MonoBehaviour
     }
     void Crash()
     {
-        GetComponent<Movement>().audioSource.Stop();
-        crashSFX.Play();
-        GetComponent<Movement>().enabled = false;
-        Invoke("ReloadScene", delay);
+        if (gameData.gameStatus.scrap >= 1)
+        {
+            gameData.gameStatus.scrap--;
+            GetComponent<Movement>().audioSource.Stop();
+            crashSFX.Play();
+            GetComponent<Movement>().enabled = false;
+            Invoke("ReloadScene", delay);
+            sceneManager.sceneData.newLevel = false;
+        }
+        else
+        {
+            sceneManager.sceneData.newLevel = true;
+            gameData.gameStatus.scrap--;
+            Invoke("LoadLoseScreen", delay);
+        }
     }
 
     void ReloadScene()
@@ -62,9 +78,22 @@ public class ColisionHandler : MonoBehaviour
 
     void LoadNextScene()
     {
+        statsData.stats.levelsCleared++;
+        sceneManager.sceneData.newLevel = true;
         if (SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings - 1)
+        {
+            gameData.gameStatus.currentLevel++;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         else
-            SceneManager.LoadScene(0);
+        {
+            gameData.gameStatus.currentLevel = 2;
+            SceneManager.LoadScene(2);
+        }
+    }
+
+    void LoadLoseScreen()
+    {
+        SceneManager.LoadScene("Lose Scene");
     }
 }

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class FuelOrb : MonoBehaviour
 {
+    public int elementIndex;
+
     public int fuel;
     public float shrinkRate;
     private bool isFueling = false;
     private Transform playerPos = null;
     private Transform fuelPos;
     private Vector3 pos;
+
+    public SO_SceneManager sceneManager;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +32,11 @@ public class FuelOrb : MonoBehaviour
         //Checks if triggerer is player
         if (other.gameObject.tag == "Player" && !isFueling)
         {
+            sceneManager.fuelOrbsDict.Remove(elementIndex);
+
+
             //Adds fuel to player
-            other.GetComponent<Movement>().gm.gameStatus.fuel += fuel;
+            other.GetComponent<Movement>().gameData.gameStatus.fuel += fuel;
             isFueling = true;
             //Grabs player position
             playerPos = other.gameObject.GetComponent<Transform>();
@@ -41,16 +48,21 @@ public class FuelOrb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerPos != null)
-        {
-            pos = playerPos.position;
-            fuelPos.position = Vector3.MoveTowards(fuelPos.position, pos, 0.1f);
-            fuelPos.localScale = Vector3.Lerp(fuelPos.localScale, new Vector3(0.1f, 0.1f, 0.1f), shrinkRate * Time.deltaTime);
-        }
+        MoveTowardsPlayer();
     }
 
     private void DestroyOrb()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void MoveTowardsPlayer()
+    {
+        if (playerPos != null)
+        {
+            pos = playerPos.position;
+            fuelPos.position = Vector3.MoveTowards(fuelPos.position, pos, 0.1f);
+            fuelPos.localScale = Vector3.Lerp(fuelPos.localScale, new Vector3(0.1f, 0.1f, 0.1f), shrinkRate * Time.deltaTime);
+        }
     }
 }
